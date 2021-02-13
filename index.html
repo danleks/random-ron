@@ -22,7 +22,28 @@
 	</p>
 
 	<script>
-		// Your code goes here...
+		const API_ENDPOINT = 'https://ron-swanson-quotes.herokuapp.com/v2/quotes';
+        const button = document.querySelector('button');
+        const blockquote = document.querySelector('blockquote');
+
+        const handleRequest = () => {
+            fetch(API_ENDPOINT)
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    return Promise.reject(response);
+                }
+            })
+            .then(data => blockquote.textContent = data)
+            .catch(error => {
+                blockquote.textContent = 'Failed to load a quote';
+                console.warn('Somth went wrong.', error);
+            });
+        };
+
+        button.addEventListener('click', handleRequest);
+        handleRequest();
 	</script>
 </body>
 </html>
