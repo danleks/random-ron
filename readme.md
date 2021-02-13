@@ -4,4 +4,5 @@ When the page loads, a random quote from the Ron Swanson Quotes API should be di
 
 When the More Ron button is clicked, a new quote from the API should replace the current one.
 
-[API Endpoint](https://ron-swanson-quotes.herokuapp.com/v2/quotes)
+API Endpoint:
+`https://ron-swanson-quotes.herokuapp.com/v2/quotes`
