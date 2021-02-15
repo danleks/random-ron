@@ -25,6 +25,7 @@
 		const API_ENDPOINT = 'https://ron-swanson-quotes.herokuapp.com/v2/quotes';
         const button = document.querySelector('button');
         const blockquote = document.querySelector('blockquote');
+        let quotes = [];
 
         const handleRequest = () => {
             fetch(API_ENDPOINT)
@@ -35,7 +36,17 @@
                     return Promise.reject(response);
                 }
             })
-            .then(data => blockquote.textContent = data)
+            .then(data => {
+                if (quotes.slice(-50).indexOf(data[0]) === -1) {
+                    blockquote.textContent = data[0];
+                    quotes.push(data[0]);
+                } else {
+                    console.log({
+                        duplicate: data[0],
+                    })
+                    alert('duplicate quote. skip it and generate next one.');
+                }
+            })
             .catch(error => {
                 blockquote.textContent = 'Failed to load a quote';
                 console.warn('Somth went wrong.', error);
