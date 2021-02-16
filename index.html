@@ -49,7 +49,23 @@
                     return Promise.reject(response);
                 }
             })
-            .then(data => checkQuote(data[0]))
+            .then(data => {
+                if (quotes.indexOf(data[0]) > -1) {
+                    alert('Duplicate quote. It will be replaced with a new one.');
+                    console.log(data[0]);
+                    handleRequest();
+                    return;
+                } else {
+                    quotes.push(data[0]);
+                    blockquote.textContent = data[0];
+                }
+
+                if (quotes.length > 50) {
+                    quotes.shift();
+                }
+
+                console.log(quotes);
+            })
             .catch(error => {
                 blockquote.textContent = 'Failed to load a quote';
                 console.warn('Somth went wrong.', error);
